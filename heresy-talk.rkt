@@ -28,10 +28,10 @@
  #:title "The guy wot is talking to you"
  (code
   (describe Me
-            (name     "John Berry")
-            (github   "http://github.com/jarcane")
-            (twitter  "http://twitter.com/J_Arcane")
-            (employer "http://metosin.fi"))))
+    (name     "John Berry")
+    (github   "http://github.com/jarcane")
+    (twitter  "http://twitter.com/J_Arcane")
+    (employer "http://metosin.fi"))))
 
 (slide
  #:title "Content Warning: Stupid Ideas"
@@ -213,4 +213,8 @@
            (:= (x) x (+ x 5))
            (:_ (x) print (format$ "But now it's #_" x))
            (:= x "Behold, monadish state")
-           (return x)))))
+           (return x))))
+ (para #:align 'left "Output:")
+ (para #:align 'left (tt "Value was 5"))
+ (para #:align 'left (tt "Now it's 10"))
+ (para #:align 'left (code "Behold, monadish state")))
