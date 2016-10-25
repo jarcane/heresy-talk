@@ -204,7 +204,38 @@
   '((size fat) (sleigh ready) (sack empty))))
 
 (slide
- #:title "We have to go deeper"
+ #:title "Operator Operator Operator"
+ (size-in-pixels
+  (code
+   (describe State)
+   
+   (def macroset :=
+     [(:= (name ...) var value)
+      (fn (s) (thing extends s
+                     (var (let ([name (s (quote name))] ...)
+                            value))))]
+     [(:= var value)
+      (fn (s) (thing extends s (var value)))])
+   
+   (def macroset :_ 
+     [(:_ (name ...) f args ...)
+      (fn (s)
+          (let ([name (s (quote name))] ...)
+            (f args ...)
+            s))]
+     [(:_ f args ...)
+      (fn (s)
+          (f args ...)
+          s)])
+   
+   (def macro return (name)
+     (fn (s) (s (quote name))))
+   
+   (def fn do> fns
+     (apply :> (join State fns))))))
+
+(slide
+ #:title "By your powers combined!"
  (para #:align 'left
        (code
          (do>
