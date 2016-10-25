@@ -186,6 +186,10 @@
  #:title "From Beneath You, It Devours"
  (para "Things are immutable objects with pattern-matching syntax for self-copying")
  (code
+  > (describe Santa
+              (size 'fat)
+              (sleigh 'ready)
+              (sack 'full))
   > (def Santa-after-Christmas (Santa `(* * empty)))
   > (Santa-after-Christmas)
   '((size fat) (sleigh ready) (sack empty))))
