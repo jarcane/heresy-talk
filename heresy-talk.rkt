@@ -7,7 +7,7 @@
 ;; Helper functions
 
 (define (url address)
-  (clickback (tt address)
+  (clickback (hyperlinkize (tt address))
              (λ () (send-url address))))
 
 ;; Begin slideshow
@@ -94,6 +94,7 @@
 
 (slide
  #:title "Oh FOR God's Sake"
+ (t "Cry can be anything you want, and so can a list, so:")
  (code (def fn :> (initial-value . fns)
          (for (f in fns with initial-value)
            (carry (f cry)))))
@@ -103,7 +104,42 @@
                  (partial - 5)
                  even?)))
  (para #:align 'left
-       (tt "> #f")))
+       (code > #f)))
 
 (slide
- #:title "Stealing Clojure's Thunder")
+ #:title "We can rebuild him"
+ (para #:align 'left
+       "First we need a little helper for currying:"
+       (code
+        (def macro f> (f args ...)
+          (fn (x)
+              (f x args ...)))))
+ (para #:align 'left
+       "Now one more little macro:"
+       (code
+        (def macro -> (iv (f args ...) ...)
+          (:> iv
+              (f> f args ...)
+              ...))))
+ (para #:align 'left
+       "Et voila!")
+ (para #:align 'left
+       (code
+        (-> '(1 2 3 4)
+            (left 2)
+            (append '(a b)))))
+ (para #:align 'left
+       (code > '(1 2 a b))))
+
+(slide
+ #:title "Better, Stronger, Faster"
+ (para "Of course, those are just helpful shortcuts. We can call the helpers directly too:")
+ (para #:align 'left
+       (code
+        (:> '(1 2 3 4)
+            (l> map (fn (x) (* x x)))
+            (f> left 2)
+            (l> append '(a b))
+            (f> append '(a b)))))
+ (para #:align 'left
+       (code > '(a b 1 4 a b))))
