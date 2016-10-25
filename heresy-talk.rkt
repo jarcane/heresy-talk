@@ -99,12 +99,13 @@
          (for (f in fns with initial-value)
            (carry (f cry)))))
  (para #:align 'left
-       (code (:> 5
-                 inc
-                 (partial - 5)
-                 even?)))
+       (code
+        > (:> 5
+              inc
+              (partial - 5)
+              even?)))
  (para #:align 'left
-       (code > #f)))
+       (code #f)))
 
 (slide
  #:title "We can rebuild him"
@@ -125,21 +126,58 @@
        "Et voila!")
  (para #:align 'left
        (code
-        (-> '(1 2 3 4)
-            (left 2)
-            (append '(a b)))))
+        > (-> '(1 2 3 4)
+              (left 2)
+              (append '(a b)))))
  (para #:align 'left
-       (code > '(1 2 a b))))
+       (code '(1 2 a b))))
 
 (slide
  #:title "Better, Stronger, Faster"
  (para "Of course, those are just helpful shortcuts. We can call the helpers directly too:")
  (para #:align 'left
        (code
-        (:> '(1 2 3 4)
-            (l> map (fn (x) (* x x)))
-            (f> left 2)
-            (l> append '(a b))
-            (f> append '(a b)))))
+        > (:> '(1 2 3 4)
+              (l> map (fn (x) (* x x)))
+              (f> left 2)
+              (l> append '(a b))
+              (f> append '(a b)))))
  (para #:align 'left
-       (code > '(a b 1 4 a b))))
+       (code '(a b 1 4 a b))))
+
+(slide
+ #:title "It's a ... thing."
+ (bitmap "thing-013.jpg"))
+
+(slide
+ #:title "It's alive!"
+ (size-in-pixels
+  (code  
+   (def fn thing (lst)
+     (fn args*
+         (let ([alst lst])
+           (select
+            ((null? args*) alst)
+            ((symbol? (head args*)) (tail (assoc (head args*) alst)))
+            ((list? (head args*)) 
+             (let recur ([al alst]
+                         [pat (head args*)]
+                         [c 1])
+               (select
+                ((null? pat) (thing al))
+                ((eq? (head pat) '*) (recur alst (tail pat) (+ 1 c)))
+                (else (recur (subst (head (index c al))
+                                    (join (head pat) Null)
+                                    al)
+                        (tail pat)
+                        (+ 1 c))))))
+            (else (error "Thing expected a symbol or a pattern")))))))))
+
+(slide
+ #:title "From Beneath You, It Devours"
+ (para "Things are immutable objects with pattern-matching syntax for self-copying")
+ (code
+  > (def Santa-after-Christmas (Santa `(* * empty)))
+  > (Santa-after-Christmas)
+  '((size fat) (sleigh ready) (sack empty))))
+
