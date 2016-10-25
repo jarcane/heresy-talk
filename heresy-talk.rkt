@@ -208,12 +208,12 @@
  (size-in-pixels
   (code
    > (describe Cthulhu
-        (name     "Great Lord Cthulhu")
-        (size     "gigantic")
-        (location "R'Lyeh")
-        (status   "dreaming")
-        (eat      (fn (victim)
-                      (print (format$ "#_ devours #_" name victim)))))
+       (name     "Great Lord Cthulhu")
+       (size     "gigantic")
+       (location "R'Lyeh")
+       (status   "dreaming")
+       (eat      (fn (victim)
+                     (print (format$ "#_ devours #_" name victim)))))
    > (def The-Sleeper-Awakened (Cthulhu `(* * * "awake")))
    > (The-Sleeper-Awakened 'status)
    "awake")))
