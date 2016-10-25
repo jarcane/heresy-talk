@@ -15,3 +15,7 @@
  (para (t "Slide Source: ")
        (clickback (tt "http://github.com/jarcane/heresy-talk")
                   (λ () (send-url "http://github.com/jarcane/heresy-talk")))))
+
+(slide
+ #:title "What's a Lambda?"
+ (size-in-pixels (bitmap "CoCo3system.jpg")))
