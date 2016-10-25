@@ -10,17 +10,19 @@
   (clickback (tt address)
              (λ () (send-url address))))
 
+;; Begin slideshow
+
 (slide
  (big (t "The Heresy Programming Language"))
  (bitmap "yellowsignicon.jpeg")
  (it "Or, Learning Through Madness")
  (t "")
  (para (t "Language: ")
-       (clickback (tt "http://github.com/jarcane/heresy")
-                  (λ () (send-url "http://github.com/jarcane/heresy"))))
+       (url "http://github.com/jarcane/heresy"))
+ (para (t "Docs:")
+       (url "https://docs.racket-lang.org/heresy"))
  (para (t "Slide Source: ")
-       (clickback (tt "http://github.com/jarcane/heresy-talk")
-                  (λ () (send-url "http://github.com/jarcane/heresy-talk")))))
+       (url "http://github.com/jarcane/heresy-talk")))
 
 (slide
  #:title "What's a Lambda?"
@@ -30,3 +32,12 @@
  #:title "What's a Lambda"
  (bitmap "trs-80lisp.png")
  (size-in-pixels (url "http://mypage.iu.edu/~rdbeer/Software/BasicLisp/BasicLisp1.pdf")))
+
+(slide
+ #:title "Introducing Heresy"
+ (item "Heresy is BASIC")
+ (item "Heresy is a Lisp")
+ (item "Heresy is functional")
+ (item "Heresy is for learning")
+ (item "Heresy is an experiment")
+ (item "Heresy is for everyone"))
