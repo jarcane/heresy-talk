@@ -121,6 +121,7 @@
 (slide
  #:title "Oh FOR God's Sake"
  (t "Cry can be anything you want, and so can a list, so:")
+ 'next
  (code (def fn :> (initial-value . fns)
          (for (f in fns with initial-value)
            (carry (f cry)))))
@@ -136,6 +137,7 @@
 
 (slide
  #:title "We can rebuild him"
+ 'next
  (para #:align 'left
        "First we need a little helper for currying:"
        (code
@@ -175,11 +177,7 @@
        (code '(a b 1 4 a b))))
 
 (slide
- #:title "It's a ... thing."
- (bitmap "thing-013.jpg"))
-
-(slide
- #:title "It's alive!"
+ #:title "Bored CS Kid 101"
  (size-in-pixels
   (code  
    (def fn thing (lst)
@@ -201,6 +199,10 @@
                         (tail pat)
                         (+ 1 c))))))
             (else (error "Thing expected a symbol or a pattern")))))))))
+
+(slide
+ #:title "It's a ... thing."
+ (bitmap "thing-013.jpg"))
 
 (slide
  #:title "From Beneath You, It Devours"
