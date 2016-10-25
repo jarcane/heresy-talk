@@ -254,8 +254,10 @@
        (size-in-pixels
         (code
          (def macro return (name)
-           (fn (s) (s (quote name)))))))
- 'next
+           (fn (s) (s (quote name))))))))
+
+(slide
+ #:title "And one more thing ..."
  (para #:align 'left
        (size-in-pixels
         (code
