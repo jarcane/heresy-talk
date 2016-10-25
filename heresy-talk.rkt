@@ -4,6 +4,12 @@
 (require slideshow/code)
 (require (only-in browser/external send-url))
 
+;; Helper functions
+
+(define (url address)
+  (clickback (tt address)
+             (λ () (send-url address))))
+
 (slide
  (big (t "The Heresy Programming Language"))
  (bitmap "yellowsignicon.jpeg")
@@ -19,3 +25,8 @@
 (slide
  #:title "What's a Lambda?"
  (size-in-pixels (bitmap "CoCo3system.jpg")))
+
+(slide
+ #:title "What's a Lambda"
+ (bitmap "trs-80lisp.png")
+ (size-in-pixels (url "http://mypage.iu.edu/~rdbeer/Software/BasicLisp/BasicLisp1.pdf")))
