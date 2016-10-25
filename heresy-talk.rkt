@@ -44,12 +44,55 @@
 
 (slide
  #:title "For Loops"
- (code (def fn fizzbuzz (n)
-         (for (x in (range 1 to n))
-           (select
-            ((zero? x) x)
-            ((zero? (+ (mod x 5)
-                       (mod x 3))) (print "FizzBuzz"))
-            ((zero? (mod x 5)) (print "Buzz"))
-            ((zero? (mod x 3)) (print "Fizz"))
-            (else (print x)))))))
+ (size-in-pixels
+  (code (def fn bottles (n)
+          (for (x in (range n to 1 step -1))
+            (? (format$ "#_ bottles of beer on the wall, #_ bottles of beer,"
+                        x x))
+            (? "Take one down pass it around,")
+            (if (zero? (dec x)) then
+              (? "No more bottles of beer on the wall.")
+             else
+              (do 
+                (print & (dec x))
+                (? " bottles of beer on the wall."))))))))
+
+(slide
+ #:title "Making For Functional with GOTO (kinda)"
+ (size-in-pixels
+  (code (define-syntax-rule (for-loop var lst x body ...)
+          (let/ec break-k
+            (syntax-parameterize 
+                ((break (syntax-rules () 
+                          [(_ ret) (break-k ret)]
+                          [(_) (break-k)])))
+              (let loop ((cry-v x)
+                         (l lst))
+                (syntax-parameterize
+                    ([cry (make-rename-transformer #'cry-v)])
+                  (cond [(null? l) cry-v]
+                        [else (let ([var (car l)])
+                                (loop
+                                 (call/ec
+                                  (lambda (k)
+                                    (syntax-parameterize
+                                        ([carry (make-rename-transformer #'k)])
+                                      body ...)
+                                    cry-v))
+                                 (cdr l)))])))))))))
+
+(slide
+ #:title "It's My Party And I'll Cry If I Want To"
+ (para "Question: How do we accumulate a value over a FOR loop, without mutable variables?")
+ (para "Answer:" (tt "carry") "and" (tt "cry"))
+ (code (def fn fact (n)
+         (for (x in (range n to 1 step -1) with 1)
+           (carry (* cry x))))))
+
+(slide
+ #:title "It's My Party And I'll Cry If I Want To"
+ (code (def cards
+         (for (suit in '(♠ ♣ ♥ ♦))
+           (carry (append (for (x in (append (range 2 to 10) '(J Q K A)))
+                            (carry (join `(,x ,suit) cry)))
+                          cry))))))
