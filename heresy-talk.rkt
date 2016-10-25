@@ -85,14 +85,13 @@
  #:title "It's My Party And I'll Cry If I Want To"
  (para "Question: How do we accumulate a value over a FOR loop, without mutable variables?")
  (para "Answer:" (tt "carry") "and" (tt "cry"))
- (code (def fn fact (n)
-         (for (x in (range n to 1 step -1) with 1)
-           (carry (* cry x))))))
+ (size-in-pixels
+  (code (def cards
+          (for (suit in '(♠ ♣ ♥ ♦))
+            (carry (append (for (x in (append (range 2 to 10) '(J Q K A)))
+                             (carry (join `(,x ,suit) cry)))
+                           cry)))))))
 
 (slide
- #:title "It's My Party And I'll Cry If I Want To"
- (code (def cards
-         (for (suit in '(♠ ♣ ♥ ♦))
-           (carry (append (for (x in (append (range 2 to 10) '(J Q K A)))
-                            (carry (join `(,x ,suit) cry)))
-                          cry))))))
+ #:title "It's ... it's a thing"
+ )
