@@ -249,3 +249,36 @@
  (para #:align 'left (tt "Value was 5"))
  (para #:align 'left (tt "Now it's 10"))
  (para #:align 'left (code "Behold, monadish state")))
+
+(slide
+ #:title "But wait, there's more!"
+ (item #:align 'left "The Y combinator")
+ (item #:align 'left "Named anonymous functions")
+ (subitem #:align 'left
+          (size-in-pixels
+           (code
+            > (map (fnlet fib (n)
+                          (select
+                           ((zero? n) 0)
+                           ((one? n) 1)
+                           (else (+ (fib (- n 2))
+                                    (fib (- n 1))))))
+                   (range 0 to 10))
+            '(0 1 1 2 3 5 8 13 21 34 55))))
+ (item #:align 'left "Infix math DSL based on Clojure's maya.clj")
+ (subitem #:align 'left
+          (size-in-pixels
+           (code
+            (def fn quadratic (a b c)
+              (m let d = 4 * a * c
+                 let D = b * b - d ~> sqrt
+                 let t = 2 * a let -b = (- b)
+                 let x1 = -b + D / t
+                 let x2 = -b - D / t in
+                 (list x1 x2)))))))
+
+(slide
+ #:title "That's all folks!"
+ (t "Programming should be fun.")
+ (t "Try things. Crazy things.")
+ (t "We learn by experimenting."))
