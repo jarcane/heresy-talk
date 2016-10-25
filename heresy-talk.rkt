@@ -93,5 +93,17 @@
                            cry)))))))
 
 (slide
- #:title "It's ... it's a thing"
- )
+ #:title "Oh FOR God's Sake"
+ (code (def fn :> (initial-value . fns)
+         (for (f in fns with initial-value)
+           (carry (f cry)))))
+ (para #:align 'left
+       (code (:> 5
+                 inc
+                 (partial - 5)
+                 even?)))
+ (para #:align 'left
+       (tt "> #f")))
+
+(slide
+ #:title "Stealing Clojure's Thunder")
