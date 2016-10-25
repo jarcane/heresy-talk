@@ -25,6 +25,15 @@
        (url "http://github.com/jarcane/heresy-talk")))
 
 (slide
+ #:title "Content Warning: Stupid Ideas"
+ (size-in-pixels (bitmap "warning.png"))
+ (para "The following talk contains content that may be dangerous to your sanity,"
+       "and at the very least contains many things that are neither practical"
+       "or even particularly good ideas.")
+ (para "Don't worry if you find anything confusing, in all likelihood, that"
+       "merely means you are still sane."))
+
+(slide
  #:title "What's a Lambda?"
  (size-in-pixels (bitmap "CoCo3system.jpg")))
 
@@ -181,3 +190,6 @@
   > (Santa-after-Christmas)
   '((size fat) (sleigh ready) (sack empty))))
 
+(slide
+ #:title "We have to go deeper"
+ )
