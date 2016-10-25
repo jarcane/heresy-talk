@@ -279,6 +279,7 @@
 
 (slide
  #:title "That's all folks!"
+ (bitmap "notstupid.jpeg")
  (t "Programming should be fun.")
  (t "Try things. Crazy things.")
  (t "We learn by experimenting."))
