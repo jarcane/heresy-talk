@@ -54,10 +54,15 @@
 (slide
  #:title "Introducing Heresy"
  (item "Heresy is BASIC")
+ 'next
  (item "Heresy is a Lisp")
+ 'next
  (item "Heresy is functional")
+ 'next
  (item "Heresy is for learning")
+ 'next
  (item "Heresy is an experiment")
+ 'next
  (item "Heresy is for everyone"))
 
 (slide
@@ -103,6 +108,7 @@
  #:title "It's My Party And I'll Cry If I Want To"
  (para "Question: How do we accumulate a value over a FOR loop, without mutable variables?")
  (para "Answer:" (tt "carry") "and" (tt "cry"))
+ 'next
  (size-in-pixels
   (code (def cards
           (for (suit in '(♠ ♣ ♥ ♦))
@@ -116,6 +122,7 @@
  (code (def fn :> (initial-value . fns)
          (for (f in fns with initial-value)
            (carry (f cry)))))
+ 'next
  (para #:align 'left
        (code
         > (:> 5
@@ -133,6 +140,7 @@
         (def macro f> (f args ...)
           (fn (x)
               (f x args ...)))))
+ 'next
  (para #:align 'left
        "Now one more little macro:"
        (code
@@ -140,6 +148,7 @@
           (:> iv
               (f> f args ...)
               ...))))
+ 'next
  (para #:align 'left
        "Et voila!")
  (para #:align 'left
@@ -194,45 +203,59 @@
 (slide
  #:title "From Beneath You, It Devours"
  (para "Things are immutable objects with pattern-matching syntax for self-copying")
- (code
-  > (describe Santa
-              (size 'fat)
-              (sleigh 'ready)
-              (sack 'full))
-  > (def Santa-after-Christmas (Santa `(* * empty)))
-  > (Santa-after-Christmas)
-  '((size fat) (sleigh ready) (sack empty))))
+ (size-in-pixels
+  (code
+   > (describe Santa
+               (size 'fat)
+               (sleigh 'ready)
+               (sack 'full))
+   > (def Santa-after-Christmas (Santa `(* * empty)))
+   > (Santa-after-Christmas)
+   '((size fat) (sleigh ready) (sack empty)))))
 
 (slide
  #:title "Operator Operator Operator"
- (size-in-pixels
-  (code
-   (describe State)
-   
-   (def macroset :=
-     [(:= (name ...) var value)
-      (fn (s) (thing extends s
-                     (var (let ([name (s (quote name))] ...)
-                            value))))]
-     [(:= var value)
-      (fn (s) (thing extends s (var value)))])
-   
-   (def macroset :_ 
-     [(:_ (name ...) f args ...)
-      (fn (s)
-          (let ([name (s (quote name))] ...)
-            (f args ...)
-            s))]
-     [(:_ f args ...)
-      (fn (s)
-          (f args ...)
-          s)])
-   
-   (def macro return (name)
-     (fn (s) (s (quote name))))
-   
-   (def fn do> fns
-     (apply :> (join State fns))))))
+ (para #:align 'left
+       (size-in-pixels
+        (code
+         (describe State))))
+ 'next
+ (para #:align 'left
+       (size-in-pixels
+        (code
+         (def macroset :=
+           [(:= (name ...) var value)
+            (fn (s) (thing extends s
+                           (var (let ([name (s (quote name))] ...)
+                                  value))))]
+           [(:= var value)
+            (fn (s) (thing extends s (var value)))]))))
+ 'next
+ (para #:align 'left
+       (size-in-pixels
+        (code
+         (def macroset :_ 
+           [(:_ (name ...) f args ...)
+            (fn (s)
+                (let ([name (s (quote name))] ...)
+                  (f args ...)
+                  s))]
+           [(:_ f args ...)
+            (fn (s)
+                (f args ...)
+                s)]))))
+ 'next
+ (para #:align 'left
+       (size-in-pixels
+        (code
+         (def macro return (name)
+           (fn (s) (s (quote name)))))))
+ 'next
+ (para #:align 'left
+       (size-in-pixels
+        (code
+         (def fn do> fns
+           (apply :> (join State fns)))))))
 
 (slide
  #:title "By your powers combined!"
@@ -245,6 +268,7 @@
            (:_ (x) print (format$ "But now it's #_" x))
            (:= x "Behold, monadish state")
            (return x))))
+ 'next
  (para #:align 'left "Output:")
  (para #:align 'left (tt "Value was 5"))
  (para #:align 'left (tt "Now it's 10"))
@@ -253,6 +277,7 @@
 (slide
  #:title "But wait, there's more!"
  (item #:align 'left "The Y combinator")
+ 'next
  (item #:align 'left "Named anonymous functions")
  (subitem #:align 'left
           (size-in-pixels
@@ -265,6 +290,7 @@
                                     (fib (- n 1))))))
                    (range 0 to 10))
             '(0 1 1 2 3 5 8 13 21 34 55))))
+ 'next
  (item #:align 'left "Infix math DSL based on Clojure's maya.clj")
  (subitem #:align 'left
           (size-in-pixels
