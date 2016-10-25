@@ -166,6 +166,7 @@
 (slide
  #:title "Better, Stronger, Faster"
  (para "Of course, those are just helpful shortcuts. We can call the helpers directly too:")
+ 'next
  (para #:align 'left
        (code
         > (:> '(1 2 3 4)
@@ -221,7 +222,7 @@
    "awake")))
 
 (slide
- #:title "Operator Operator Operator"
+ #:title "Operator, Operator"
  (para #:align 'left
        (size-in-pixels
         (code
@@ -275,13 +276,13 @@
            (:_ (x) print (format$ "Value was #_" x))
            (:= (x) x (+ x 5))
            (:_ (x) print (format$ "But now it's #_" x))
-           (:= x "Behold, monadish state")
+           (:= x "Behold, the state monad ... -ish.")
            (return x))))
  'next
  (para #:align 'left "Output:")
  (para #:align 'left (tt "Value was 5"))
  (para #:align 'left (tt "Now it's 10"))
- (para #:align 'left (code "Behold, monadish state")))
+ (para #:align 'left (code "Behold, the state monad ... -ish.")))
 
 (slide
  #:title "But wait, there's more!"
