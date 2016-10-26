@@ -112,6 +112,12 @@
  (para "Answer:" (tt "carry") "and" (tt "cry"))
  'next
  (size-in-pixels
+  (code
+   (def fn fact-2 (n)
+     (for (x in (range n to 1 step -1) with 1)
+       (carry (* cry x))))))
+ 'next
+ (size-in-pixels
   (code (def cards
           (for (suit in '(♠ ♣ ♥ ♦))
             (carry (append (for (x in (append (range 2 to 10) '(J Q K A)))
