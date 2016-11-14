@@ -2,3 +2,4 @@
 *.rkt~
 
 *.rkt#1#
+compiled/

@@ -3,6 +3,7 @@
 (require slideshow/text)
 (require slideshow/code)
 (require (only-in browser/external send-url))
+(require "./heresy-language.rkt")
 
 ;; Helper functions
 
@@ -65,6 +66,13 @@
  (item "Heresy is an experiment")
  'next
  (item "Heresy is for everyone"))
+
+(slide
+ #:title "Everything But kitchen-sink"
+ (size-in-pixels
+  (para (foldr (λ (x y) (string-append (symbol->string x) " " y))
+               "☣"
+               the-heresy-language))))
 
 (slide
  #:title "For Loops"
