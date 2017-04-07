@@ -153,28 +153,32 @@
  'next
  (para #:align 'left
        "First we need a little helper for currying:"
-       (code
-        (def macro f> (f args ...)
-          (fn (x)
-              (f x args ...)))))
+       (size-in-pixels
+        (code
+         (def macro f> (f args ...)
+           (fn (x)
+               (f x args ...))))))
  'next
  (para #:align 'left
        "Now one more little macro:"
-       (code
-        (def macro -> (iv (f args ...) ...)
-          (:> iv
-              (f> f args ...)
-              ...))))
+       (size-in-pixels
+        (code
+         (def macro -> (iv (f args ...) ...)
+           (:> iv
+               (f> f args ...)
+               ...)))))
  'next
  (para #:align 'left
        "Et voila!")
  (para #:align 'left
-       (code
-        > (-> '(1 2 3 4)
-              (left 2)
-              (append '(a b)))))
+       (size-in-pixels
+        (code
+         > (-> '(1 2 3 4)
+               (left 2)
+               (append '(a b))))))
  (para #:align 'left
-       (code '(1 2 a b))))
+       (size-in-pixels
+        (code '(1 2 a b)))))
 
 (slide
  #:title "Better, Stronger, Faster"
@@ -301,9 +305,28 @@
  #:title "But wait, there's more!"
  'next
  (item #:align 'left "The Y combinator")
+ (para #:align 'left
+       (size-in-pixels
+        (code
+         (def Y
+           (fn (b)
+               ((fn (f) (b (fn (x) ((f f) x))))
+                (fn (f) (b (fn (x) ((f f) x))))))))))
+ 'next
+ (item #:align 'left "The Y* combinator")
+ (para #:align 'left
+       (size-in-pixels
+        (code
+         (def Y*
+           (fn (b)
+               ((fn (f) (b (fn args (apply (f f) args))))
+                (fn (f) (b (fn args (apply (f f) args)))))))))))
+
+(slide
+ #:title "We can't stop here, this is bat country"
  'next
  (item #:align 'left "Named anonymous functions")
- (subitem #:align 'left
+ (para #:align 'left
           (size-in-pixels
            (code
             > (map (fnlet fib (n)
@@ -316,7 +339,7 @@
             '(0 1 1 2 3 5 8 13 21 34 55))))
  'next
  (item #:align 'left "Infix math DSL based on Clojure's maya.clj")
- (subitem #:align 'left
+ (para #:align 'left
           (size-in-pixels
            (code
             (def fn quadratic (a b c)
