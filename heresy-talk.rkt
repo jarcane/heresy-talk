@@ -31,8 +31,7 @@
   (describe Me
     (name     "John Berry")
     (github   "http://github.com/jarcane")
-    (twitter  "http://twitter.com/J_Arcane")
-    (employer "http://metosin.fi"))))
+    (employer "http://wolt.com"))))
 
 (slide
  #:title "Content Warning: Stupid Ideas"
