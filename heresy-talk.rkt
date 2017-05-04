@@ -3,7 +3,7 @@
 (require slideshow/text)
 (require slideshow/code)
 (require (only-in browser/external send-url))
-(require "./heresy-language.rkt")
+(require "./heresy-language-generator.rkt")
 
 ;; Helper functions
 
@@ -69,9 +69,10 @@
 (slide
  #:title "Everything But kitchen-sink"
  (size-in-pixels
-  (para (foldr (λ (x y) (string-append (symbol->string x) " " y))
+  (with-scale 0.75
+    (para (foldr (λ (x y) (string-append (symbol->string x) ", " y))
                "☣"
-               the-heresy-language))))
+               (the-heresy-language))))))
 
 (slide
  #:title "For Loops"
@@ -193,6 +194,10 @@
               (f> append '(a b)))))
  (para #:align 'left
        (code '(a b 1 4 a b))))
+
+(slide
+ #:title "useing you're pipe's good"
+ (bitmap "C53qLh2XEAE-Jh3.jpg"))
 
 (slide
  #:title "Bored CS Kid 101"

@@ -1,6 +1,7 @@
 #lang racket
 
 (require heresy)
+(provide the-heresy-language)
 
 (define-values (foo bar) (module->exports 'heresy))
 
@@ -20,6 +21,7 @@
                 (tail)
                 (heads)))
 
-(->> (append l1 l2 l3)
-     (sort (fn (x y) (string-ci<? (symbol->string x)
-                                  (symbol->string y)))))
+(define (the-heresy-language)
+  (->> (append l1 l2 l3)
+       (sort (fn (x y) (string-ci<? (symbol->string x)
+                                    (symbol->string y))))))
