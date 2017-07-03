@@ -121,7 +121,7 @@
  'next
  (size-in-pixels
   (code
-   (def fn fact-2 (n)
+   (def fn fact (n)
      (for (x in (range n to 1 step -1) with 1)
        (carry (* cry x))))))
  'next
