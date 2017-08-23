@@ -31,7 +31,7 @@
   (describe Me
     (name     "John Berry")
     (github   "http://github.com/jarcane")
-    (employer "http://wolt.com"))))
+    (employer "http://futurice.com"))))
 
 (slide
  #:title "Content Warning: Stupid Ideas"
@@ -298,7 +298,7 @@
            (:_ (x) print (format$ "Value was #_" x))
            (:= (x) x (+ x 5))
            (:_ (x) print (format$ "But now it's #_" x))
-           (:= x "Behold, the state monad ... -ish.")
+           (:= x "Behold, a monad ... -ish.")
            (return x))))
  'next
  (para #:align 'left "Output:")
