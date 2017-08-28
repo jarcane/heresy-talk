@@ -53,17 +53,17 @@
 
 (slide
  #:title "Introducing Heresy"
- 'next
+ 
  (item "Heresy is BASIC")
- 'next
+ 
  (item "Heresy is a Lisp")
- 'next
+ 
  (item "Heresy is functional")
- 'next
+ 
  (item "Heresy is for learning")
- 'next
+ 
  (item "Heresy is an experiment")
- 'next
+ 
  (item "Heresy is for everyone"))
 
 (slide
@@ -116,15 +116,15 @@
 (slide
  #:title "It's My Party And I'll Cry If I Want To"
  (para "Question: How do we accumulate a value over a FOR loop, without mutable variables?")
- 'next
+ 
  (para "Answer:" (tt "carry") "and" (tt "cry"))
- 'next
+ 
  (size-in-pixels
   (code
    (def fn fact (n)
      (for (x in (range n to 1 step -1) with 1)
        (carry (* cry x))))))
- 'next
+ 
  (size-in-pixels
   (code (def cards
           (for (suit in '(♠ ♣ ♥ ♦))
@@ -135,11 +135,11 @@
 (slide
  #:title "Oh FOR God's Sake"
  (t "Cry can be anything you want, and so can a list, so:")
- 'next
+ 
  (code (def fn :> (initial-value . fns)
          (for (f in fns with initial-value)
            (carry (f cry)))))
- 'next
+ 
  (para #:align 'left
        (code
         > (:> 5
@@ -151,7 +151,7 @@
 
 (slide
  #:title "We can rebuild him"
- 'next
+ 
  (para #:align 'left
        "First we need a little helper for currying:"
        (size-in-pixels
@@ -159,7 +159,7 @@
          (def macro f> (f args ...)
            (fn (x)
                (f x args ...))))))
- 'next
+ 
  (para #:align 'left
        "Now one more little macro:"
        (size-in-pixels
@@ -168,7 +168,7 @@
            (:> iv
                (f> f args ...)
                ...)))))
- 'next
+ 
  (para #:align 'left
        "Et voila!")
  (para #:align 'left
@@ -184,7 +184,7 @@
 (slide
  #:title "Better, Stronger, Faster"
  (para "Of course, those are just helpful shortcuts. We can call the helpers directly too:")
- 'next
+ 
  (para #:align 'left
        (code
         > (:> '(1 2 3 4)
@@ -249,7 +249,7 @@
        (size-in-pixels
         (code
          (describe State))))
- 'next
+ 
  (para #:align 'left
        (size-in-pixels
         (code
@@ -260,7 +260,7 @@
                                   value))))]
            [(:= var value)
             (fn (s) (thing extends s (var value)))]))))
- 'next
+ 
  (para #:align 'left
        (size-in-pixels
         (code
@@ -274,7 +274,7 @@
             (fn (s)
                 (f args ...)
                 s)]))))
- 'next
+ 
  (para #:align 'left
        (size-in-pixels
         (code
@@ -300,7 +300,7 @@
            (:_ (x) print (format$ "But now it's #_" x))
            (:= x "Behold, a monad ... -ish.")
            (return x))))
- 'next
+ 
  (para #:align 'left "Output:")
  (para #:align 'left (tt "Value was 5"))
  (para #:align 'left (tt "Now it's 10"))
@@ -308,24 +308,24 @@
 
 (slide
  #:title "And I Can Prove It!"
- 'next
+ 
  (para #:align 'left 
   (size-in-pixels 
    (code
     (describe Identity (state Null)))))
- 'next
+ 
  (para #:align 'left
   (size-in-pixels
    (code
     (def fn id (v)
       (Identity (list v))))))
- 'next
+ 
  (para #:align 'left
   (size-in-pixels
    (code
     (def fn >>= (act fn)
       (fn (act 'state))))))
- 'next
+ 
  (para #:align 'left
   (size-in-pixels
    (code
@@ -338,7 +338,7 @@
 
 (slide #:title "There and back again ..."
  (para #:align 'left "And now we can do this:")
- 'next
+ 
  (para #:align 'left
    (size-in-pixels
      (code
@@ -349,7 +349,7 @@
          (print (format$ "But now it's #_" x))
          (x := "Behold, a monad proof ... -ish.")
          (print x)))))
- 'next
+ 
  (para #:align 'left "Output:")
  (para #:align 'left (tt "Value was 5"))
  (para #:align 'left (tt "But now it's 10"))
@@ -357,7 +357,7 @@
 
 (slide
  #:title "But wait, there's more!"
- 'next
+ 
  (item #:align 'left "The Y combinator")
  (para #:align 'left
        (size-in-pixels
@@ -366,7 +366,7 @@
            (fn (b)
                ((fn (f) (b (fn (x) ((f f) x))))
                 (fn (f) (b (fn (x) ((f f) x))))))))))
- 'next
+ 
  (item #:align 'left "The Y* combinator")
  (para #:align 'left
        (size-in-pixels
@@ -378,7 +378,7 @@
 
 (slide
  #:title "We can't stop here, this is bat country"
- 'next
+ 
  (item #:align 'left "Named anonymous functions")
  (para #:align 'left
           (size-in-pixels
@@ -391,7 +391,7 @@
                                     (fib (- n 1))))))
                    (range 0 to 10))
             '(0 1 1 2 3 5 8 13 21 34 55))))
- 'next
+ 
  (item #:align 'left "Infix math DSL based on Clojure's maya.clj")
  (para #:align 'left
           (size-in-pixels
