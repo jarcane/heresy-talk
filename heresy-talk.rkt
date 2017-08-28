@@ -304,7 +304,56 @@
  (para #:align 'left "Output:")
  (para #:align 'left (tt "Value was 5"))
  (para #:align 'left (tt "Now it's 10"))
- (para #:align 'left (code "Behold, the state monad ... -ish.")))
+ (para #:align 'left (code "Behold, a monad ... -ish.")))
+
+(slide
+ #:title "And I Can Prove It!"
+ 'next
+ (para #:align 'left 
+  (size-in-pixels 
+   (code
+    (describe Identity (state Null)))))
+ 'next
+ (para #:align 'left
+  (size-in-pixels
+   (code
+    (def fn id (v)
+      (Identity (list v))))))
+ 'next
+ (para #:align 'left
+  (size-in-pixels
+   (code
+    (def fn >>= (act fn)
+      (fn (act 'state))))))
+ 'next
+ (para #:align 'left
+  (size-in-pixels
+   (code
+    (def macroset do> (:=)
+      ((_ (exp ...)) (exp ...))
+      ((_ (name := val) exp ...)
+       (>>= (id val) (fn (name) (do> exp ...))))
+      ((_ (exp0 ...) exp1 ...)
+       (>>= (id (exp0 ...)) (fn (_) (do> exp1 ...)))))))))
+
+(slide #:title "There and back again ..."
+ (para #:align 'left "And now we can do this:")
+ 'next
+ (para #:align 'left
+   (size-in-pixels
+     (code
+       (do>
+         (x := 5)
+         (print (format$ "Value was #_" x))
+         (x := (+ x 5))
+         (print (format$ "But now it's #_" x))
+         (x := "Behold, a monad proof ... -ish.")
+         (print x)))))
+ 'next
+ (para #:align 'left "Output:")
+ (para #:align 'left (tt "Value was 5"))
+ (para #:align 'left (tt "But now it's 10"))
+ (para #:align 'left (tt "Behold, a monad proof ... -ish.")))
 
 (slide
  #:title "But wait, there's more!"
