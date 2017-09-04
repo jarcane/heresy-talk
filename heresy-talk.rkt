@@ -31,6 +31,7 @@
   (describe Me
     (name     "John Berry")
     (github   "http://github.com/jarcane")
+    (twitter  "http://twitter.com/J_Arcane")
     (employer "http://futurice.com"))))
 
 (slide
