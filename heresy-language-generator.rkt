@@ -15,13 +15,13 @@
                 (tail)
                 (heads)))
 
-(define l3 (->> bar
-                (tail)
-                (head)
-                (tail)
-                (heads)))
+;(define l3 (->> bar
+;                (tail)
+;                (head)
+;                (tail)
+;                (heads)))
 
 (define (the-heresy-language)
-  (->> (append l1 l2 l3)
+  (->> (append l1 l2)
        (sort (fn (x y) (string-ci<? (symbol->string x)
                                     (symbol->string y))))))

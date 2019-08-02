@@ -26,12 +26,12 @@
        (url "http://github.com/jarcane/heresy-talk")))
 
 (slide
- #:title "The guy wot is talking to you"
+ #:title "The girl wot is talking to you"
  (code
   (describe Me
-    (name     "John Berry")
+    (name     "Annaia Berry")
     (github   "http://github.com/jarcane")
-    (twitter  "http://twitter.com/J_Arcane")
+    (twitter  "http://twitter.com/Ann_Arcana")
     (employer "http://futurice.com"))))
 
 (slide
@@ -245,6 +245,47 @@
    "awake")))
 
 (slide
+ #:title "Alex Knauth is smarter than me"
+ (para "Things have inheritance")
+ (code
+  (describe Killbot
+    (name "Killbot 5000")
+    (bullets 500)
+    (shoot (fn (type)
+             (Self `(* ,(- (Self type) 1))))))
+  
+  (describe Killbot-V2 extends Killbot
+            (missiles 50))
+
+  > ((send Killbot shoot 'bullets))
+  '((name "Killbot 5000") (bullets 499) ...)
+  > ((send Killbot-V2 shoot 'missiles))
+  '((name "Killbot 5000")
+    (bullets 500)
+    ...
+    (missiles 49))))
+
+(slide
+ #:title "Knowing where you came from"
+ (para "What the heck is this thing?")
+ (code
+  > (def Dave (Killbot-V2 '("Dave" * * *)))
+  > (is-a? Killbot-V2 Dave)
+  #t)
+ (para "Who's your momma?")
+ (code
+  > (is-a? Killbot Dave))
+ 'next
+ (code #t)
+ 'next
+ (para "And of course we can check equality")
+ (code
+  > (thing=? Dave Dave)
+  #t
+  > (thing=? Dave Killbot)
+  #f))
+
+(slide
  #:title "Operator, Operator"
  (para #:align 'left
        (size-in-pixels
@@ -355,6 +396,27 @@
  (para #:align 'left (tt "Value was 5"))
  (para #:align 'left (tt "But now it's 10"))
  (para #:align 'left (tt "Behold, a monad proof ... -ish.")))
+
+(slide
+ #:title "blah blah burritos blah blah endofunctors"
+ (bitmap "monad-do.png"))
+
+(slide
+ #:title "some more of God's greatest mistakes"
+ (code
+  > (list-do
+     (rank <- (append (range 2 to 10) '(J Q K A)))
+     (suit <- '(♠ ♣ ♥ ♦))
+     (if (equal? suit '♦))
+     (card = (format$ "#_#_" rank suit))
+     (yield card))
+ '("2♦" "3♦" "4♦" "5♦" "6♦" "7♦" "8♦" "9♦" "10♦" "J♦" "Q♦" "K♦" "A♦")
+ > (maybe-do
+    (a <- (some 5))
+    (b <- (some 4))
+    (c = (+ a b))
+    (* a c))
+ 45))
 
 (slide
  #:title "But wait, there's more!"
