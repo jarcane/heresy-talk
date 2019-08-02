@@ -1,4 +1,4 @@
-#lang slideshow
+#lang slideshow/widescreen
 
 (require slideshow/text)
 (require slideshow/code)
@@ -272,6 +272,7 @@
   > (def Dave (Killbot-V2 '("Dave" * * *)))
   > (is-a? Killbot-V2 Dave)
   #t)
+ 'next
  (para "Who's your momma?")
  (code
   > (is-a? Killbot Dave))
@@ -324,7 +325,7 @@
            (fn (s) (s (quote name))))))))
 
 (slide
- #:title "And one more thing ..."
+ #:title "The missing link"
  (para #:align 'left
        (size-in-pixels
         (code
@@ -410,7 +411,7 @@
      (if (equal? suit '♦))
      (card = (format$ "#_#_" rank suit))
      (yield card))
- '("2♦" "3♦" "4♦" "5♦" "6♦" "7♦" "8♦" "9♦" "10♦" "J♦" "Q♦" "K♦" "A♦")
+ '("2♦" "3♦" "4♦" "5♦" "6♦" "7♦" "8♦" ...)
  > (maybe-do
     (a <- (some 5))
     (b <- (some 4))
@@ -462,10 +463,119 @@
             (def fn quadratic (a b c)
               (m let d = 4 * a * c
                  let D = b * b - d ~> sqrt
-                 let t = 2 * a let -b = (- b)
+                 let t = 2 * a
+                 let -b = (- b)
                  let x1 = -b + D / t
                  let x2 = -b - D / t in
                  (list x1 x2)))))))
+
+(slide
+ #:title "Throw it in a hole"
+ (item "Holes are a simple boxed value for storing mutable state, based on Racket boxes and an API inspired by Clojure atoms.")
+ (code
+  > (def foo (hole 1))
+  > (reset foo 2)
+  "#<procedure:this>"
+  > (deref foo)
+  2
+  > (update foo + 5)
+  "#<procedure:this>" 
+  > (deref foo)
+  7))
+
+(slide
+ #:title "if you apply a monad to an atom are you doing nuclear physics"
+ (code
+  > (deref
+     (hole-do
+      (x <- (hole 2))
+      (y <- (hole 5))
+      (z = (* x y))
+      (yield z)))
+  10))
+
+(slide
+ #:title "And one more thing ... "
+ (para "I promised a big announcement")
+ 'next
+ (para "Well ... ")
+ 'next
+ (para "remember this guy?")
+ (bitmap "thing-013.jpg"))
+
+(slide
+ #:title "A question for the ages"
+ (para "What if type programming itself were dynamic?")
+ 'next
+ (para "What if the types themselves were simply another function, written like any other?")
+ 'next
+ (para "What if an object could type check itself at runtime?"))
+
+(slide
+ #:title "Presenting: Typed Things"
+ (para "Things can now be optionally typed")
+ (code
+  (describe TheBeeb
+    (name  (string?) "BBC Micro")
+    (model (symbol?) 'B)
+    (CPU   (symbol?) 'm6502)
+    (RAM   (number?) 32)
+    (boot  (fn?)     (fn ()
+                       (? "Acorn MOS\nBASIC\n>_"))))))
+
+(slide
+ #:title "Functions as types"
+ (para "Thing 'types' are actually predicate functions. If it takes a value and returns a bool, it's a 'type'")
+ 'next
+ (para "We can define and store our own 'types':")
+ (code
+  (def fn bbc-ram-cap? (v)
+    (and (number? v)
+         (> v 15)
+         (< v 129))))
+ 'next
+ (para "Now we can make our Beeb respect its history")
+ (code
+  (describe TheBeeb
+            ...
+            (RAM (bbc-ram-cap?) 32)
+            ...)))
+
+(slide
+ #:title "you are all valid"
+ (para "Now that we have our new type, new things will check themselves")
+ 'next
+ (code
+  > (def BeePlus (TheBeeb '(* B+ * 64 *)))
+  > (BeePlus)
+  '((name "BBC Micro") (model B+) (CPU m6502) (RAM 64) ...)
+  > (def UberBeeb (TheBeeb '(* * * 2048 *)))
+  Thing encountered type error in assignment: RAM must be (bbc-ram-cap?))
+ 'next
+ (para "They check on declaration too of course:")
+ (code
+  > (describe ThisDontWork (field (number?) "dave"))
+  Thing encountered type error in construction: field must be (number?))
+ 'next
+ (para "Type signatures auto-curry")
+ (code
+  > (describe TooBig (foo (< 128) 32))
+  Thing encountered type error in construction: foo must be (< 128)))
+
+(slide
+ #:title "Gazing into the future"
+ (para "Future plans for Heresy")
+ 'next
+ (item "DIM and type declarations")
+ 'next
+ (item "A better function type predicate?")
+ 'next
+ (item "Better thing UX")
+ (subitem "new assignment syntax")
+ (subitem "empty objects")
+ (subitem "easier printing")
+ 'next
+ (item "Heresy2?"))
 
 (slide
  #:title "That's all folks!"
