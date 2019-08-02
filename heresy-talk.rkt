@@ -555,12 +555,20 @@
  (para "They check on declaration too of course:")
  (code
   > (describe ThisDontWork (field (number?) "dave"))
-  Thing encountered type error in construction: field must be (number?))
- 'next
+  Thing encountered type error in construction: field must be (number?)))
+
+(slide
+ #:title "The power of predicate typing"
  (para "Type signatures auto-curry")
  (code
   > (describe TooBig (foo (< 128) 32))
-  Thing encountered type error in construction: foo must be (< 128)))
+  Thing encountered type error in construction: foo must be (< 128))
+ 'next
+ (para "we can use this to create generic-like type signatures")
+ (code
+  > (describe ListOfNumbers (nums (list-of? number?) '(1 2 3 4)))
+  > (ListOfNumbers '((1 2 "dave" 4)))
+  Thing encountered type error in assignment: nums must be (list-of? number?)))
 
 (slide
  #:title "Gazing into the future"
