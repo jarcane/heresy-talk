@@ -242,7 +242,10 @@
                      (print (format$ "#_ devours #_" name victim)))))
    > (def The-Sleeper-Awakened (Cthulhu `(* * * "awake")))
    > (The-Sleeper-Awakened 'status)
-   "awake")))
+   "awake"
+   > (def Hit-With-Boat (The-Sleeper-Awakened '((status "unconscious"))))
+   > (Hit-With-Boat 'status)
+   "unconscious")))
 
 (slide
  #:title "Alex Knauth is smarter than me"
@@ -257,9 +260,9 @@
   (describe Killbot-V2 extends Killbot
             (missiles 50))
 
-  > ((send Killbot shoot 'bullets))
+  > ((send Killbot 'shoot 'bullets))
   '((name "Killbot 5000") (bullets 499) ...)
-  > ((send Killbot-V2 shoot 'missiles))
+  > ((send Killbot-V2 'shoot 'missiles))
   '((name "Killbot 5000")
     (bullets 500)
     ...
@@ -564,7 +567,7 @@
   > (describe TooBig (foo (< 128) 32))
   Thing encountered type error in construction: foo must be (< 128))
  'next
- (para "we can use this to create generic-like type signatures")
+ (para "we can use this to create types that take arguments")
  (code
   > (describe ListOfNumbers (nums (list-of? number?) '(1 2 3 4)))
   > (ListOfNumbers '((1 2 "dave" 4)))
@@ -578,8 +581,9 @@
  'next
  (item "A better function type predicate?")
  'next
+ (item "Generic types?")
+ 'next
  (item "Better thing UX")
- (subitem "new assignment syntax")
  (subitem "empty objects")
  (subitem "easier printing")
  'next

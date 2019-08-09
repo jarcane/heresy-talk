@@ -3,3 +3,4 @@
 
 *.rkt#1#
 compiled/
+.DS_Store
