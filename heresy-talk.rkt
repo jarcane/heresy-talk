@@ -565,13 +565,35 @@
  (para "Type signatures auto-curry")
  (code
   > (describe TooBig (foo (< 128) 32))
-  Thing encountered type error in construction: foo must be (< 128))
+  Thing encountered type error in construction:
+  foo must be (< 128))
  'next
  (para "we can use this to create types that take arguments")
  (code
   > (describe ListOfNumbers (nums (list-of? number?) '(1 2 3 4)))
   > (ListOfNumbers '((1 2 "dave" 4)))
-  Thing encountered type error in assignment: nums must be (list-of? number?)))
+  Thing encountered type error in assignment:
+  nums must be (list-of? number?)))
+
+(slide
+ #:title "How does it work? FOR loops of course!"
+ (size-in-pixels
+  (code
+   [(list-of? list? (head args*))
+    (let ([new-lst
+           (for (x in (head args*) with λlst)
+             (let ([pred? (get-type-pred (head x) type-list)]
+                   [type (get-type-name (head x) type-list)])
+               (if (pred? (head (tail x)))
+                   then
+                   (carry (subst (head x) (fn (_) (head (tail x))) cry))
+                   else
+                   (raise (exn:thing-type-err
+                           (format$ "Thing encountered type error in assignment: #_ must be #_"
+                                    (head x)
+                                    type)
+                           (current-continuation-marks))))))])
+      (make-thing new-lst types parents ident))])))
 
 (slide
  #:title "Gazing into the future"
