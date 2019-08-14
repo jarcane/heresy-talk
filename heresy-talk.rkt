@@ -255,18 +255,18 @@
     (name "Killbot 5000")
     (bullets 500)
     (shoot (fn (type)
-             (Self `(* ,(- (Self type) 1))))))
-  
-  (describe Killbot-V2 extends Killbot
-            (missiles 50))
+             (Self `((,type ,(- (Self type) 1)))))))
 
-  > ((send Killbot 'shoot 'bullets))
-  '((name "Killbot 5000") (bullets 499) ...)
+  (describe Killbot-V2 extends Killbot
+    (missiles 50))
+
+  > (send Killbot 'shoot 'bullets)
+  (Killbot (name Killbot 5000) (bullets 499) (shoot ...))
   > ((send Killbot-V2 'shoot 'missiles))
-  '((name "Killbot 5000")
-    (bullets 500)
-    ...
-    (missiles 49))))
+  (Killbot-V2 (name Killbot 5000)
+         (bullets 500)
+         (shoot ...)
+         (missiles 49))))
 
 (slide
  #:title "Knowing where you came from"
@@ -478,11 +478,11 @@
  (code
   > (def foo (hole 1))
   > (reset foo 2)
-  "#<procedure:this>"
+  (Hole (box #&2))
   > (deref foo)
   2
   > (update foo + 5)
-  "#<procedure:this>" 
+  (Hole (box #&7))
   > (deref foo)
   7))
 
@@ -550,8 +550,8 @@
  'next
  (code
   > (def BeePlus (TheBeeb '(* B+ * 64 *)))
-  > (BeePlus)
-  '((name "BBC Micro") (model B+) (CPU m6502) (RAM 64) ...)
+  > BeePlus
+  (TheBeeb (name BBC Micro) (model B+) (CPU m6502) (RAM 64) (boot ...))
   > (def UberBeeb (TheBeeb '(* * * 2048 *)))
   Thing encountered type error in assignment: RAM must be (bbc-ram-cap?))
  'next
@@ -593,7 +593,7 @@
                                     (head x)
                                     type)
                            (current-continuation-marks))))))])
-      (make-thing new-lst types parents ident))])))
+      (make-thing new-lst name types parents ident))])))
 
 (slide
  #:title "Gazing into the future"
@@ -607,7 +607,7 @@
  'next
  (item "Better thing UX")
  (subitem "empty objects")
- (subitem "easier printing")
+ (subitem "better printing")
  'next
  (item "Heresy2?"))
 
